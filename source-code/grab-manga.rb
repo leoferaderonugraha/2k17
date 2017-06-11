@@ -2,7 +2,7 @@
 require 'open-uri'
 require 'nokogiri'
 require 'mechanize'
-require 'pry'
+#require 'pry'
 
 
 m = Mechanize.new
@@ -13,3 +13,7 @@ links.each do |x|
 end
 puts 'Done...'
 #binding.pry
+
+=begin
+example usage: ./grab-manga http://mangashiro.net/eromanga-sensei-30 ~/Manga/Eromanga-Sensei/Chapter-30
+=end
