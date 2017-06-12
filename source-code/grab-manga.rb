@@ -1,19 +1,23 @@
 #!/usr/bin/ruby
-require 'open-uri'
+require 'httparty'
 require 'nokogiri'
 require 'mechanize'
-#require 'pry'
+require 'pry'
 
 
 m = Mechanize.new
-links = Nokogiri::HTML(open(ARGV[0])).css('img')
-links.each do |x|
-  m.get(x['src']).save("#{ARGV[1]}/#{x['src'].split('/').last}")
-  puts "Downloading #{x['src'].split('/').last} to #{ARGV[1]}"
+m.pluggable_parser.default = Mechanize::Download
+status = 0
+begin
+  links = Nokogiri::HTML(HTTParty.get(ARGV[0])).css('img')
+  links.each do |x|
+    s = m.get(x['src'])
+    status = s.code
+    s.save("#{ARGV[1]}/#{x['src'].split('/').last}")
+    puts "Downloading #{x['src'].split('/').last} to #{ARGV[1]}"
+  end
+  puts 'Done...'
+rescue
+  puts "Error on getting #{ARGV[0]}"
 end
-puts 'Done...'
 #binding.pry
-
-=begin
-example usage: ./grab-manga http://mangashiro.net/eromanga-sensei-30 ~/Manga/Eromanga-Sensei/Chapter-30
-=end
