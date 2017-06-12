@@ -1,7 +1,7 @@
 require 'mechanize'
 
-module Bot
-  class FB
+module BotApi
+  class Facebook
     def initialize()
       @agent = Mechanize.new
       @agent.redirect_ok = true
@@ -81,4 +81,7 @@ module Bot
       nil
     end
   end
+  #class Twitter
+  #class Instagram
+  #and so on...
 end
