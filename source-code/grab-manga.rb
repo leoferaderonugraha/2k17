@@ -21,3 +21,7 @@ rescue
   puts "Error on getting #{ARGV[0]}"
 end
 #binding.pry
+
+=begin
+example usage: ruby grab-manga.rb http://mangashiro.net/eromanga-sensei-31 ~/Manga/Eromanga-Sensei/Chapter-31
+=end
